@@ -12,6 +12,13 @@
 <body>
 
     <h1>e15 Project 1</h1>
+    String: <?php echo $inputString ?>
+    Is big word?
+    <?php if ($isBigWord) { ?>
+    Yes
+    <?php } else { ?>
+    No
+    <?php } ?>
 
 </body>
 
