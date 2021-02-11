@@ -1,22 +1,17 @@
 <?php
 
-function isPalindrome($inputString)
-{
+session_start();
+
+if (isset($_SESSION['results'])) {
+    $results = $_SESSION['results'];
+
+    // $isBigWord = $results['isBigWord'];
+    // $isPalindrome = $results['isPalindrome'];
+    // $inputString = $results['inputString'];
+
+    extract($results);
+
+    $_SESSION['results'] = null;
 }
-
-function isBigWord($inputString)
-{
-    return strlen($inputString) > 7;
-    
-    // if (strlen($inputString) > 7) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-}
-
-$inputString = 'mississippi';
-
-$isBigWord = isBigWord($inputString); // true/false
 
 require 'index-view.php';

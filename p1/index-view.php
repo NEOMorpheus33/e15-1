@@ -12,13 +12,25 @@
 <body>
 
     <h1>e15 Project 1</h1>
-    String: <?php echo $inputString ?>
+
+    <form method='GET' action='process.php'>
+        <input type='text' name='inputString'>
+
+        <button type='submit'>Process string</button>
+    </form>
+
+    <?php if (isset($inputString)): ?>
+    <div>
+        String: <?php echo $inputString ?>
+    </div>
+
     Is big word?
     <?php if ($isBigWord) { ?>
     Yes
     <?php } else { ?>
     No
     <?php } ?>
+    <?php endif ?>
 
 </body>
 
