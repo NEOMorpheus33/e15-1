@@ -1,4 +1,4 @@
-version=2021-02-12-15-24-45
+version=2021-02-12-15-50-19
 #
 #
 # Main
@@ -199,7 +199,7 @@ github_sync() {
 
 production_deploy() {
     github_sync
-    ssh -t $PRODUCTION_SSH "cd $PRODUCTION_DOC_ROOT/$repository; git pull"
+    ssh -t $PRODUCTION_SSH "cd $PROD_DIR_DOCUMENT_ROOT/$repository; git pull"
 }
 
 production_edit_virtual_hosts() {
