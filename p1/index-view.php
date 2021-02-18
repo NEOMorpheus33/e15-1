@@ -15,7 +15,6 @@
 
     <form method='GET' action='process.php'>
         <input type='text' name='inputString'>
-
         <button type='submit'>Process string</button>
     </form>
 

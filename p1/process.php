@@ -2,22 +2,15 @@
 
 session_start();
 
-function isPalindrome($inputString)
-{
-}
-
-function isBigWord($inputString)
-{
-    return strlen($inputString) > 7;
-}
+require 'StringProcessor.php';
 
 $inputString = $_GET['inputString'];
 
-$isBigWord = isBigWord($inputString); // true/false
+$stringProcessor = new StringProcessor($inputString);
 
 $_SESSION['results'] = [
-    'isPalindrome' => true,
-    'isBigWord' => $isBigWord,
+    'isPalindrome' => $stringProcessor->isPalindrome(),
+    'isBigWord' => $stringProcessor->isBigWord(),
     'inputString' => $inputString
 ];
 
