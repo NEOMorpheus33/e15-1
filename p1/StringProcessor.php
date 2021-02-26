@@ -21,4 +21,9 @@ class StringProcessor
     {
         return strlen($this->inputString) > 7;
     }
+
+    public static function xyz()
+    {
+        return 'xyz';= 
+    }
 }

@@ -6,6 +6,8 @@ require 'StringProcessor.php';
 
 $inputString = $_GET['inputString'];
 
+$xyz = StringProcessor::xyz();
+
 $stringProcessor = new StringProcessor($inputString);
 
 $_SESSION['results'] = [
