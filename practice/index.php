@@ -21,3 +21,18 @@ $total = ($pennies * $penny_value)
     + ($quarters * $quarter_value);
 
 require 'index-view.php';
+
+
+if (isset($x)) {
+    $y = $x;
+} else {
+    $y = 1;
+}
+
+var_dump($y);
+
+
+$y = $x ?? $x ?? 1;
+
+
+var_dump($y);
