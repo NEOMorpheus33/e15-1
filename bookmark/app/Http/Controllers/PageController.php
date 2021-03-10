@@ -6,8 +6,19 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    /**
+     * GET /
+     */
     public function index()
     {
-        return view('welcome');
+        return view('pages/welcome');
+    }
+
+    /**
+     * GET /support
+     */
+    public function support()
+    {
+        return view('pages/support');
     }
 }
