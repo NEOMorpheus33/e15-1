@@ -8,6 +8,61 @@ use Illuminate\Support\Arr;
 class BookController extends Controller
 {
     /**
+    * GET /books/create
+    * Display the form to add a new book
+    */
+    public function create(Request $request)
+    {
+        return view('books/create');
+    }
+
+    /**
+    * POST /books
+    * Process the form for adding a new book
+    */
+    public function store(Request $request)
+    {
+        # Code will eventually go here to add the book to the database,
+        # but for now we'll just dump the form data to the page for proof of concept
+        dump($request->all());
+    }
+
+    /**
+     * GET /search
+     * Search books based on title or author
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'searchTerms' => 'required',
+            'searchType' => 'required'
+        ]);
+
+        # If validation fails, it will redirect back to `/`
+
+        # Load book data
+        $bookData = file_get_contents(database_path('books.json'));
+        $books = json_decode($bookData, true);
+
+        # Get form data
+        $searchType = $request->input('searchType', 'title');
+        $searchTerms = $request->input('searchTerms', '');
+
+        # Do search
+        $searchResults = [];
+        foreach ($books as $slug => $book) {
+            if (strtolower($book[$searchType]) == strtolower($searchTerms)) {
+                $searchResults[$slug] = $book;
+            }
+        }
+
+        # Send user back to the homepage with results
+        return redirect('/')->with([
+            'searchResults' => $searchResults
+        ])->withInput();
+    }
+    
+    /**
      * GET /books
      * Show all the books
      */
@@ -23,7 +78,7 @@ class BookController extends Controller
         # Load our book data using PHP's file_get_contents
         # We specify our books.json file path using Laravel's database_path helper
         $bookData = file_get_contents(database_path('books.json'));
-    
+
         # Convert the string of JSON text we loaded from books.json into an
         # array using PHP's built-in json_decode function
         $books = json_decode($bookData, true);
@@ -32,7 +87,7 @@ class BookController extends Controller
         $books = Arr::sort($books, function ($value) {
             return $value['title'];
         });
-
+ 
         return view('books/index', ['books' => $books]);
     }
 
@@ -51,20 +106,10 @@ class BookController extends Controller
         $book = Arr::first($books, function ($value, $key) use ($slug) {
             return $key == $slug;
         });
-        
+ 
         return view('books/show', [
             'book' => $book,
         ]);
-    }
-
-    /**
-     * GET /search/{category}/{subcategory}
-     */
-    public function search($category, $subcategory)
-    {
-        # TODO: Query the db for books in these categories
-        # TODO: Return a view instead of a string
-        return 'Search in: '.$category.', '.$subcategory;
     }
 
     /**
